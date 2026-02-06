@@ -16,22 +16,26 @@ if(!userId){
     .then(res=>setFlights(res.data));
   },[]);
 
-  const bookFlight = async (flightId) => {
-    const userId = localStorage.getItem("userId");
+  const bookFlight = async (flightId, price) => {
 
-    if(!userId){
-      alert("Please login first");
-      return;
-    }
+  const confirm = window.confirm(`Pay ₹${price} ?`);
 
-    await axios.post(`${API}/api/booking/book`,{
-      userId,
-      flightId,
-      seatsBooked:1
-    });
+  if(!confirm) return;
 
-    alert("Flight booked");
-  };
+  alert("Payment Successful (Demo)");
+
+  const userId = localStorage.getItem("userId");
+
+  await axios.post(`${API}/api/booking/book`,{
+    userId,
+    flightId,
+    seatsBooked:1,
+    totalPrice: price
+  });
+
+  alert("Flight booked");
+};
+
 
   return (
     <div>
