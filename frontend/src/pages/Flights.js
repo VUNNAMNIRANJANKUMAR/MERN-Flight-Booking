@@ -7,6 +7,11 @@ export default function Flights() {
   const [flights,setFlights]=useState([]);
 
   useEffect(()=>{
+    const userId = localStorage.getItem("userId");
+if(!userId){
+  window.location.href="/#/login";
+}
+
     axios.get(`${API}/api/flight`)
     .then(res=>setFlights(res.data));
   },[]);
