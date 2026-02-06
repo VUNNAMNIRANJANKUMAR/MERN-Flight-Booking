@@ -9,7 +9,7 @@ export default function Flights() {
   useEffect(()=>{
     const userId = localStorage.getItem("userId");
 if(!userId){
-  window.location.href="/#/login";
+  window.location.hash = "#/login";
 }
 
     axios.get(`${API}/api/flight`)
