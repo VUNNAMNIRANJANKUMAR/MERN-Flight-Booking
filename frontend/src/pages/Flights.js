@@ -43,7 +43,7 @@ if(!userId){
       {flights.map(f=>(
         <div key={f._id}>
           {f.from} → {f.to} | ₹{f.price}
-          <button onClick={()=>bookFlight(f._id)}>Book</button>
+          <button onClick={()=>bookFlight(f._id,f.price)}>Book</button>
         </div>
       ))}
     </div>
