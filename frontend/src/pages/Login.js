@@ -12,6 +12,8 @@ export default function Login() {
     );
     alert("Login success");
     console.log(res.data);
+    localStorage.setItem("userId", res.data.user.id);
+
   };
 
   return (
