@@ -22,9 +22,15 @@ if(!userId){
       <h2>My Bookings</h2>
 
       {bookings.map(b=>(
-        <div key={b._id}>
-          {b.flightId.from} → {b.flightId.to} | ₹{b.totalPrice}
-        </div>
+  <div key={b._id} style={{border:"1px solid #ccc",margin:10,padding:10}}>
+    {b.flightId.from} → {b.flightId.to} | ₹{b.totalPrice}
+    <button onClick={async()=>{
+      await axios.delete(`${API}/api/booking/${b._id}`);
+      window.location.reload();
+    }}>Cancel</button>
+  </div>
+))}
+
       ))}
     </div>
   );
