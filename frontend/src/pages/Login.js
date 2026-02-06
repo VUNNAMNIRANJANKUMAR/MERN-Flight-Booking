@@ -13,7 +13,7 @@ export default function Login() {
     alert("Login success");
     console.log(res.data);
     localStorage.setItem("userId", res.data.user.id);
-    window.location.href="/#/";
+    window.location.hash = "#/";
 
 
   };
