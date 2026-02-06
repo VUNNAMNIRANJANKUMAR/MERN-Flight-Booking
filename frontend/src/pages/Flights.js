@@ -44,6 +44,14 @@ if(!userId){
         <div key={f._id}>
           {f.from} → {f.to} | ₹{f.price}
           <button onClick={()=>bookFlight(f._id,f.price)}>Book</button>
+            {flights.map(f=>(
+  <div key={f._id} style={{border:"1px solid #ccc",padding:10,margin:10}}>
+    <h3>{f.from} → {f.to}</h3>
+    <p>Price: ₹{f.price}</p>
+    <button onClick={()=>bookFlight(f._id,f.price)}>Book</button>
+  </div>
+))}
+
         </div>
       ))}
     </div>
