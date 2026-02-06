@@ -7,7 +7,7 @@ export default function Register() {
   const [password,setPassword]=useState("");
 
   const submit = async () => {
-    await axios.post("YOUR_BACKEND_URL/api/auth/register",{name,email,password});
+    await axios.post("https://mern-flight-booking-6qke.onrender.com",{name,email,password});
     alert("Registered");
   };
 
