@@ -21,6 +21,10 @@ export default function Login() {
   return (
     <div>
       <h2>Login</h2>
+    <p>
+  New user? <a href="/#/register">Register</a>
+</p>
+
       <input placeholder="email" onChange={e => setEmail(e.target.value)} />
       <input placeholder="password" type="password" onChange={e => setPassword(e.target.value)} />
       <button onClick={submit}>Login</button>
