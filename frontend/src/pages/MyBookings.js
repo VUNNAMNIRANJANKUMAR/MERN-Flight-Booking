@@ -9,6 +9,9 @@ export default function MyBookings(){
 
   useEffect(()=>{
     const userId = localStorage.getItem("userId");
+if(!userId){
+  window.location.href="/#/login";
+}
 
     axios.get(`${API}/api/booking/user/${userId}`)
     .then(res=>setBookings(res.data));
