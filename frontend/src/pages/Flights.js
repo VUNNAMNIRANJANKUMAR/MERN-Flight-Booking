@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 
-const API = "https://mern-flight-booking-6qke.onrender.com/api/flight";
+const API = "https://mern-flight-booking-6qke.onrender.com";
 
 export default function Flights() {
   const [flights,setFlights]=useState([]);
