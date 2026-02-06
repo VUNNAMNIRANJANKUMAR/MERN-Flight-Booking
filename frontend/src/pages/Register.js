@@ -14,6 +14,9 @@ export default function Register() {
   return (
     <div>
       <h2>Register</h2>
+    <p> 
+    Registered? <a href="/#/login">Login </a>
+    </p>
       <input placeholder="name" onChange={e=>setName(e.target.value)} />
       <input placeholder="email" onChange={e=>setEmail(e.target.value)} />
       <input placeholder="password" type="password" onChange={e=>setPassword(e.target.value)} />
