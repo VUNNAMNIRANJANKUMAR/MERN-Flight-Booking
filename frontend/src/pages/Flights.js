@@ -5,7 +5,7 @@ export default function Flights() {
   const [flights,setFlights]=useState([]);
 
   useEffect(()=>{
-    axios.get("https://mern-flight-booking-6qke.onrender.com/api/flights")
+    axios.get("https://mern-flight-booking-6qke.onrender.com/api/flight")
     .then(res=>setFlights(res.data));
   },[]);
 
