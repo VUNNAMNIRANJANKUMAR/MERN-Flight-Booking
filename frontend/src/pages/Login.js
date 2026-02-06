@@ -7,7 +7,7 @@ export default function Login() {
 
   const submit = async () => {
     const res = await axios.post(
-      "YOUR_BACKEND_URL/api/auth/login",
+      "https://mern-flight-booking-6qke.onrender.com",
       { email, password }
     );
     alert("Login success");
