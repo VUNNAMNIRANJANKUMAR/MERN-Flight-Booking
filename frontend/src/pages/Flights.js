@@ -108,7 +108,7 @@ export default function Flights() {
 
   if (!user) {
     alert("Please login to book flights");
-    navigate("/login");
+    window.location.href = "/login";
     return;
   }
 
