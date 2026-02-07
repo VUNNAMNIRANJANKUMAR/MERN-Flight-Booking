@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
+
 
 export default function Login() {
   const [email, setEmail] = useState("");
@@ -13,7 +15,8 @@ export default function Login() {
     alert("Login success");
     console.log(res.data);
     localStorage.setItem("userId", res.data.user.id);
-    window.location.hash = "#/";
+    navigate("/");
+
 
 
   };
