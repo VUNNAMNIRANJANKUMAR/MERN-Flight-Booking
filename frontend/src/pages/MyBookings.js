@@ -1,41 +1,27 @@
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { useEffect,useState } from "react";
 
-
-const API = "https://mern-flight-booking-6qke.onrender.com";
-
+const API="YOUR_BACKEND";
 
 export default function MyBookings(){
 
-  const [bookings,setBookings]=useState([]);
+ const [data,setData]=useState([]);
 
-  useEffect(()=>{
-    const userId = localStorage.getItem("userId");
-if(!userId){
-  alert("Please login first");
-  return;
-}
+ useEffect(()=>{
+   const user=JSON.parse(localStorage.getItem("user"));
+   axios.get(`${API}/api/booking/user/${user.id}`)
+   .then(res=>setData(res.data));
+ },[]);
 
+ return(
+  <div style={{padding:20}}>
+    <h2>My Bookings</h2>
 
-    axios.get(`${API}/api/booking/user/${userId}`)
-    .then(res=>setBookings(res.data));
-  },[]);
-
-  return(
-    <div>
-      <h2>My Bookings</h2>
-
-      {bookings.map(b=>(
-  <div key={b._id} style={{border:"1px solid #ccc",margin:10,padding:10}}>
-    {b.flightId.from} → {b.flightId.to} | ₹{b.totalPrice}
-    <button onClick={async()=>{
-      await axios.delete(`${API}/api/booking/${b._id}`);
-      window.location.reload();
-    }}>Cancel</button>
+    {data.map(b=>(
+      <div key={b._id} style={{border:"1px solid #ddd",padding:10,margin:10}}>
+        {b.flightId.from} → {b.flightId.to}
+      </div>
+    ))}
   </div>
-))}
-
-      ))}
-    </div>
-  );
+ );
 }
