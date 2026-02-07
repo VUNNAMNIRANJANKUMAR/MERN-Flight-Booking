@@ -69,7 +69,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 
-const API = "https://YOUR-BACKEND-URL";
+const API = "https://mern-flight-booking-6qke.onrender.com";
 
 export default function Flights(){
 
