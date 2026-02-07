@@ -98,6 +98,26 @@ export default function Flights() {
       })
       .catch(err => console.log(err));
   };
+  const handleBook = (flight) => {
+
+  const user = JSON.parse(localStorage.getItem("user"));
+
+  if (!user) {
+    alert("Please login to book flights");
+    window.location.href = "/login";
+    return;
+  }
+
+  axios.post(`${API}/api/booking/book`, {
+    userId: user.id,
+    flightId: flight._id,
+    seatsBooked: 1,
+    totalPrice: flight.price
+  }).then(() => {
+    alert("Flight booked successfully!");
+  }).catch(err => alert("Booking failed"));
+};
+
 
   return (
     <div style={{ padding: 20, fontFamily: "Arial" }}>
