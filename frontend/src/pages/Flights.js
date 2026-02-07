@@ -1,10 +1,8 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
 
 
 const API = "https://mern-flight-booking-6qke.onrender.com";
-const navigate = useNavigate();
 
 
 export default function Flights() {
@@ -13,9 +11,10 @@ export default function Flights() {
   useEffect(()=>{
     const userId = localStorage.getItem("userId");
 if(!userId){
-  navigate("/login");
+  alert("Please login first");
   return;
 }
+
 
     axios.get(`${API}/api/flight`)
     .then(res=>setFlights(res.data));
