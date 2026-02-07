@@ -95,7 +95,7 @@ export default function Flights(){
  setFlights(res.data);
 })
 .catch(err=>console.log(err));
-
+  };
 
   return(
     <div style={{padding:20,fontFamily:"Arial"}}>
