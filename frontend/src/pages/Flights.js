@@ -68,60 +68,80 @@
 
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-console.log("Flights page loaded");
-
 
 const API = "https://mern-flight-booking-6qke.onrender.com";
 
-export default function Flights(){
+export default function Flights() {
 
-  const [flights,setFlights]=useState([]);
-  const [from,setFrom]=useState("");
-  const [to,setTo]=useState("");
+  const [flights, setFlights] = useState([]);
+  const [from, setFrom] = useState("");
+  const [to, setTo] = useState("");
 
-  const loadFlights = ()=>{
+  const loadFlights = () => {
     axios.get(`${API}/api/flight`)
-    .then(res=>setFlights(res.data));
+      .then(res => setFlights(res.data))
+      .catch(err => console.log(err));
   };
 
-  useEffect(()=>{
+  useEffect(() => {
     loadFlights();
-  },[]);
+  }, []);
 
-  const search = ()=>{
+  const search = () => {
     axios.get(`${API}/api/flight`)
-.then(res=>{
- console.log(res.data);
- setFlights(res.data);
-})
-.catch(err=>console.log(err));
+      .then(res => {
+        const filtered = res.data.filter(f =>
+          f.from.toLowerCase().includes(from.toLowerCase()) &&
+          f.to.toLowerCase().includes(to.toLowerCase())
+        );
+        setFlights(filtered);
+      })
+      .catch(err => console.log(err));
   };
 
-  return(
-    <div style={{padding:20,fontFamily:"Arial"}}>
+  return (
+    <div style={{ padding: 20, fontFamily: "Arial" }}>
 
-      <h1 style={{textAlign:"center"}}>✈️ Flight Booking</h1>
+      <h1 style={{ textAlign: "center" }}>✈️ Flight Booking</h1>
 
-      <div style={{textAlign:"center",marginBottom:20}}>
-        <input placeholder="From" onChange={e=>setFrom(e.target.value)} style={{padding:8,marginRight:5}}/>
-        <input placeholder="To" onChange={e=>setTo(e.target.value)} style={{padding:8,marginRight:5}}/>
-        <button onClick={search} style={{padding:8}}>Search</button>
+      <div style={{ textAlign: "center", marginBottom: 20 }}>
+        <input
+          placeholder="From"
+          onChange={e => setFrom(e.target.value)}
+          style={{ padding: 8, marginRight: 5 }}
+        />
+
+        <input
+          placeholder="To"
+          onChange={e => setTo(e.target.value)}
+          style={{ padding: 8, marginRight: 5 }}
+        />
+
+        <button onClick={search} style={{ padding: 8 }}>
+          Search
+        </button>
       </div>
 
-      {flights.map(f=>(
-        <div key={f._id} style={{
-          border:"1px solid #ddd",
-          borderRadius:8,
-          padding:15,
-          margin:"10px auto",
-          maxWidth:400,
-          boxShadow:"0 2px 5px rgba(0,0,0,.1)"
-        }}>
+      {flights.map(f => (
+        <div
+          key={f._id}
+          style={{
+            border: "1px solid #ddd",
+            borderRadius: 8,
+            padding: 15,
+            margin: "10px auto",
+            maxWidth: 400,
+            boxShadow: "0 2px 5px rgba(0,0,0,.1)"
+          }}
+        >
           <h3>{f.from} → {f.to}</h3>
           <p>Departure: {f.departureTime}</p>
-        <p>Arrival: {f.arrivalTime)</p>
+          <p>Arrival: {f.arrivalTime}</p>
           <p>Price: ₹{f.price}</p>
-          <button style={{padding:8,width:"100%"}}>Book</button>
+
+          <button style={{ padding: 8, width: "100%" }}>
+            Book
+          </button>
         </div>
       ))}
 
