@@ -69,7 +69,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 
-const API = "https://mern-flight-booking-6qke.onrender.com";
+const API = "https://YOUR-BACKEND-URL";
 
 export default function Flights(){
 
@@ -92,18 +92,29 @@ export default function Flights(){
   };
 
   return(
-    <div>
+    <div style={{padding:20,fontFamily:"Arial"}}>
 
-      <h2>Flights</h2>
+      <h1 style={{textAlign:"center"}}>✈️ Flight Booking</h1>
 
-      <input placeholder="From" onChange={e=>setFrom(e.target.value)}/>
-      <input placeholder="To" onChange={e=>setTo(e.target.value)}/>
-      <button onClick={search}>Search</button>
+      <div style={{textAlign:"center",marginBottom:20}}>
+        <input placeholder="From" onChange={e=>setFrom(e.target.value)} style={{padding:8,marginRight:5}}/>
+        <input placeholder="To" onChange={e=>setTo(e.target.value)} style={{padding:8,marginRight:5}}/>
+        <button onClick={search} style={{padding:8}}>Search</button>
+      </div>
 
       {flights.map(f=>(
-        <div key={f._id} style={{border:"1px solid #ccc",padding:10,margin:10}}>
+        <div key={f._id} style={{
+          border:"1px solid #ddd",
+          borderRadius:8,
+          padding:15,
+          margin:"10px auto",
+          maxWidth:400,
+          boxShadow:"0 2px 5px rgba(0,0,0,.1)"
+        }}>
           <h3>{f.from} → {f.to}</h3>
-          <p>₹{f.price}</p>
+          <p>Departure: {f.departureTime}</p>
+          <p>Price: ₹{f.price}</p>
+          <button style={{padding:8,width:"100%"}}>Book</button>
         </div>
       ))}
 
