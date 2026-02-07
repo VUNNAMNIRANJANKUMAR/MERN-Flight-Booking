@@ -68,6 +68,8 @@
 
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+console.log("Flights page loaded");
+
 
 const API = "https://mern-flight-booking-6qke.onrender.com";
 
@@ -87,9 +89,13 @@ export default function Flights(){
   },[]);
 
   const search = ()=>{
-    axios.get(`${API}/api/flight?from=${from}&to=${to}`)
-    .then(res=>setFlights(res.data));
-  };
+    axios.get(`${API}/api/flight`)
+.then(res=>{
+ console.log(res.data);
+ setFlights(res.data);
+})
+.catch(err=>console.log(err));
+
 
   return(
     <div style={{padding:20,fontFamily:"Arial"}}>
