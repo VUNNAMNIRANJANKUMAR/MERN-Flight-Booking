@@ -68,8 +68,12 @@
 
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
+
 
 const API = "https://mern-flight-booking-6qke.onrender.com";
+const navigate = useNavigate();
+
 
 export default function Flights() {
 
@@ -104,7 +108,7 @@ export default function Flights() {
 
   if (!user) {
     alert("Please login to book flights");
-    window.location.href = "/login";
+    navigate("/login");
     return;
   }
 
@@ -117,6 +121,7 @@ export default function Flights() {
     alert("Flight booked successfully!");
   }).catch(err => alert("Booking failed"));
 };
+
 
 
   return (
