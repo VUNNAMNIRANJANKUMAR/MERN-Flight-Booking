@@ -7,11 +7,18 @@ export default function MyBookings(){
 
  const [data,setData]=useState([]);
 
- useEffect(()=>{
-   const user=JSON.parse(localStorage.getItem("user"));
-   axios.get(`${API}/api/booking/user/${user.id}`)
-   .then(res=>setData(res.data));
- },[]);
+ useEffect(() => {
+ const user = JSON.parse(localStorage.getItem("user"));
+
+ if(!user) return;
+
+ axios
+  .get(`${API}/api/booking/user/${user.id}`)
+  .then(res => setData(res.data))
+  .catch(err=>console.log(err));
+
+}, []);
+
 
  return(
   <div style={{padding:20}}>
