@@ -5,6 +5,8 @@ import Register from "./pages/Register";
 import Flights from "./pages/Flights";
 import MyBookings from "./pages/MyBookings";
 import Navbar from "./components/Navbar";
+import Success from "./pages/Success";
+
 
 export default function App() {
   return (
@@ -16,6 +18,7 @@ export default function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/mybookings" element={<MyBookings />} />
+        <Route path="/success" element={<Success/>}/>
       </Routes>
     </>
   );
