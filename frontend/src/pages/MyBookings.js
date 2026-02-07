@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useEffect,useState } from "react";
 
-const API="YOUR_BACKEND";
+const API="https://mern-flight-booking-6qke.onrender.com";
 
 export default function MyBookings(){
 
