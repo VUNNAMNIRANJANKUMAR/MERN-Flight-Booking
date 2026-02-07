@@ -119,7 +119,8 @@ export default function Flights() {
     seatsBooked: 1,
     totalPrice: flight.price
   }).then(() => {
-    alert("Flight booked successfully!");
+  loadFlights();
+  navigate("/success");
   }).catch(() => alert("Booking failed"));
 };
 
