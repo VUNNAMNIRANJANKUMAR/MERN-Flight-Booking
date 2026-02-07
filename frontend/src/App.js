@@ -4,6 +4,7 @@ import Login from "./pages/Login";
 import Register from "./pages/Register";
 import Flights from "./pages/Flights";
 import MyBookings from "./pages/MyBookings";
+import Navbar from "./components/Navbar";
 
 
 export default function App() {
@@ -14,6 +15,10 @@ export default function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/mybookings" element={<MyBookings/>}/>
+  <BrowserRouter>
+ <Navbar/>
+ <Routes>
+
       </Routes>
     </HashRouter>
   );
