@@ -119,6 +119,7 @@ export default function Flights(){
         }}>
           <h3>{f.from} → {f.to}</h3>
           <p>Departure: {f.departureTime}</p>
+        <p>Arrival: {f.arrivalTime)</p>
           <p>Price: ₹{f.price}</p>
           <button style={{padding:8,width:"100%"}}>Book</button>
         </div>
