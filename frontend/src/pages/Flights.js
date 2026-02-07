@@ -139,9 +139,13 @@ export default function Flights() {
           <p>Arrival: {f.arrivalTime}</p>
           <p>Price: ₹{f.price}</p>
 
-          <button style={{ padding: 8, width: "100%" }}>
-            Book
-          </button>
+          <button
+  style={{ padding: 8, width: "100%" }}
+  onClick={() => handleBook(f)}
+>
+  Book
+</button>
+
         </div>
       ))}
 
