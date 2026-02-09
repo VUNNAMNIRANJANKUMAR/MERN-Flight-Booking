@@ -24,16 +24,16 @@ router.post("/add", async (req, res) => {
 //});
 
 router.get("/", async(req,res)=>{
-  const { from,to } = req.query;
+ const query={};
 
-  let query = {};
+ if(req.query.from) query.from=req.query.from;
+ if(req.query.to) query.to=req.query.to;
+ if(req.query.date) query.journeyDate=req.query.date;
 
-  if(from) query.from = from;
-  if(to) query.to = to;
-
-  const flights = await Flight.find(query);
-  res.json(flights);
+ const flights=await Flight.find(query);
+ res.json(flights);
 });
+
 
 
 module.exports = router;
