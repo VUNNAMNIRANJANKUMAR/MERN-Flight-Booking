@@ -35,8 +35,7 @@ router.post("/book", async (req, res) => {
 router.get("/:userId", async (req,res)=>{
  try{
   const bookings = await Booking.find({ userId:req.params.userId })
-   .populate("flightId");
-
+   .populate("flightId", "from to journeyDate departureTime arrivalTime price airline travelClass");
   res.json(bookings);
 
  }catch(err){
