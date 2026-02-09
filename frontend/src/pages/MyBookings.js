@@ -19,6 +19,11 @@ export default function MyBookings(){
 
 }, []);
 
+const today = new Date().toISOString().split("T")[0];
+const status =
+ booking.flightId.journeyDate < today
+ ? "Journey Over"
+ : "Yet To Fly";
 
  return(
   <div style={{padding:20}}>
