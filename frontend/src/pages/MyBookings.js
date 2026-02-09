@@ -28,6 +28,7 @@ const status =
  return(
   <div style={{padding:20}}>
     <h2>My Bookings</h2>
+    <p>Status: <b>{status}</b></p>
 
     {data.map(b=>(
       <div key={b._id} style={{border:"1px solid #ddd",padding:10,margin:10}}>
