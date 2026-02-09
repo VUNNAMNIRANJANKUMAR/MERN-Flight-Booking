@@ -24,6 +24,13 @@ const status =
  booking.flightId.journeyDate < today
  ? "Journey Over"
  : "Yet To Fly";
+const cancelBooking = (id)=>{
+ axios.delete(`${API}/api/booking/${id}`)
+ .then(()=>{
+   alert("Cancelled");
+   loadBookings();
+ });
+};
 
  return(
   <div style={{padding:20}}>
@@ -33,6 +40,9 @@ const status =
     {data.map(b=>(
       <div key={b._id} style={{border:"1px solid #ddd",padding:10,margin:10}}>
         {b.flightId.from} → {b.flightId.to}
+    <button onClick={() => cancelBooking(b._id)}>
+ Cancel Booking
+</button>
       </div>
     ))}
   </div>
