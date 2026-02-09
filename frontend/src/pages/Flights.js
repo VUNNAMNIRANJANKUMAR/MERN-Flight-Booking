@@ -140,6 +140,8 @@ export default function Flights() {
      <p>Date: {f.journeyDate}</p>
      <p>Departure: {f.departureTime}</p>
      <p>Arrival: {f.arrivalTime}</p>
+     <p>Airline: {f.airline}</p>
+     <p>Class: {f.travelClass}</p>
      <p>Price: ₹{f.price}</p>
 
      <button style={{width:"100%",padding:8}} onClick={()=>handleBook(f)}>
