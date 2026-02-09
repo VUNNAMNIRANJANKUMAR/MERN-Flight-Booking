@@ -12,17 +12,21 @@ router.post("/book", async (req, res) => {
   if (!flight) return res.status(404).json({ message: "Flight not found" });
   if (flight.seats < seatsBooked) return res.status(400).json({ message: "Not enough seats available" });
 
+  // reduce seats
   flight.seats -= seatsBooked;
   await flight.save();
 
+  // CREATE BOOKING WITH STATUS
   const booking = await Booking.create({
    userId,
    flightId,
    seatsBooked,
-   totalPrice: seatsBooked * flight.price
+   totalPrice: seatsBooked * flight.price,
+   status: "Booked"
   });
 
   res.status(201).json(booking);
+
  } catch (err) {
   res.status(500).json({ error: err.message });
  }
@@ -39,16 +43,6 @@ router.get("/:userId", async (req,res)=>{
   res.status(500).json({error:err.message});
  }
 });
-
-
-//router.get("/user/:userId", async (req,res)=>{
- //try{
- // const bookings=await Booking.find({userId:req.params.userId}).populate("flightId");
- // res.json(bookings);
-// }catch(err){
-//  res.status(500).json({error:err.message});
-// }
-//});
 
 router.delete("/:id", async (req,res)=>{
  try{
