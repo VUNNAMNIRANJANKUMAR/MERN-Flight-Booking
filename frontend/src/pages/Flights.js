@@ -144,6 +144,12 @@ export default function Flights() {
           onChange={e => setTo(e.target.value)}
           style={{ padding: 8, marginRight: 5 }}
         />
+          <input
+ type="date"
+ onChange={e=>setDate(e.target.value)}
+ style={{padding:8,marginRight:5}}
+/>
+
 
         <button onClick={search} style={{ padding: 8 }}>
           Search
