@@ -1,18 +1,25 @@
-const mongoose = require("mongoose");
+const express = require("express");
+const Flight = require("../models/Flight");
 
-const flightSchema = new mongoose.Schema({
- from:String,
- to:String,
- journeyDate:String,
- departureTime:String,
- arrivalTime:String,
- price:Number,
- seats:Number,
- airline:String,
- travelClass:String
-},{timestamps:true});
+const router = express.Router();
 
-module.exports = mongoose.model("Flight",flightSchema);
+// ADD flight
+router.post("/add", async(req,res)=>{
+ try{
+  const flight = await Flight.create(req.body);
+  res.json(flight);
+ }catch(err){
+  res.status(500).json({error:err.message});
+ }
+});
+
+// GET flights
+router.get("/", async(req,res)=>{
+ const flights = await Flight.find();
+ res.json(flights);
+});
+
+module.exports = router;
 
 
 // Get All Flights
