@@ -77,6 +77,7 @@ const API = "https://mern-flight-booking-6qke.onrender.com";
 export default function Flights() {
 
   const [flights, setFlights] = useState([]);
+  const [date,setDate]=useState("");
   const [from, setFrom] = useState("");
   const [to, setTo] = useState("");
   const navigate = useNavigate();
