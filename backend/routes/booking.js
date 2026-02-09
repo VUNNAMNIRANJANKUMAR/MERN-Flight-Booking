@@ -38,14 +38,16 @@ router.get("/user/:userId", async (req, res) => {
     res.status(500).json({ error: err.message });
   }
 });
+await Flight.findByIdAndUpdate(flightId,{
+ $inc:{ seats:-seatsBooked }
+});
+
 // To Cancel the tickets
 router.delete("/:id", async(req,res)=>{
   await Booking.findByIdAndDelete(req.params.id);
   res.json({message:"Booking cancelled"});
 });
-await Flight.findByIdAndUpdate(flightId,{
- $inc:{ seats:-seatsBooked }
-});
+
 
 // Cancel booking
 router.delete("/:id", async (req, res) => {
