@@ -93,9 +93,11 @@ export default function Flights() {
     loadFlights();
   }, []);
 
-  const search = () => {
-    axios.get(`${API}/api/flight`)
-      .then(res => {
+  const search = ()=>{
+ axios.get(`${API}/api/flight?from=${from}&to=${to}&date=${date}`)
+ .then(res=>setFlights(res.data))
+ .catch(err=>console.log(err));
+};
         const filtered = res.data.filter(f =>
           f.from.toLowerCase().includes(from.toLowerCase()) &&
           f.to.toLowerCase().includes(to.toLowerCase())
