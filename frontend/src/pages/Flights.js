@@ -162,6 +162,7 @@ export default function Flights() {
           }}
         >
           <h3>{f.from} → {f.to}</h3>
+          <p>Date: {f.journeyDate}</p>
           <p>Departure: {f.departureTime}</p>
           <p>Arrival: {f.arrivalTime}</p>
           <p>Price: ₹{f.price}</p>
