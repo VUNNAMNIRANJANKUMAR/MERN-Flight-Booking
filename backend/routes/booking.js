@@ -22,7 +22,7 @@ router.post("/book", async (req, res) => {
       seatsBooked,
       totalPrice: seatsBooked * flight.price
     });
-
+    
     res.status(201).json(booking);
   } catch (err) {
     res.status(500).json({ error: err.message });
@@ -43,6 +43,10 @@ router.delete("/:id", async(req,res)=>{
   await Booking.findByIdAndDelete(req.params.id);
   res.json({message:"Booking cancelled"});
 });
+await Flight.findByIdAndUpdate(flightId,{
+ $inc:{ seats:-seatsBooked }
+});
+
 // Cancel booking
 router.delete("/:id", async (req, res) => {
   try {
