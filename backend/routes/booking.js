@@ -28,14 +28,27 @@ router.post("/book", async (req, res) => {
  }
 });
 
-router.get("/user/:userId", async (req,res)=>{
+router.get("/:userId", async (req,res)=>{
  try{
-  const bookings=await Booking.find({userId:req.params.userId}).populate("flightId");
+  const bookings = await Booking.find({ userId:req.params.userId })
+   .populate("flightId");
+
   res.json(bookings);
+
  }catch(err){
   res.status(500).json({error:err.message});
  }
 });
+
+
+//router.get("/user/:userId", async (req,res)=>{
+ //try{
+ // const bookings=await Booking.find({userId:req.params.userId}).populate("flightId");
+ // res.json(bookings);
+// }catch(err){
+//  res.status(500).json({error:err.message});
+// }
+//});
 
 router.delete("/:id", async (req,res)=>{
  try{
