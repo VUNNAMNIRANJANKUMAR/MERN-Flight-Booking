@@ -43,5 +43,14 @@ router.delete("/:id", async(req,res)=>{
   await Booking.findByIdAndDelete(req.params.id);
   res.json({message:"Booking cancelled"});
 });
+// Cancel booking
+router.delete("/:id", async (req, res) => {
+  try {
+    await Booking.findByIdAndDelete(req.params.id);
+    res.json({ message: "Booking cancelled" });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
 
 module.exports = router;
