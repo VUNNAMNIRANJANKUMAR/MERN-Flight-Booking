@@ -13,8 +13,10 @@ export default function Login() {
     );
     alert("Login success");
     console.log(res.data);
-    localStorage.setItem("userId", res.data.user.id);
-    navigate("/");
+    localStorage.setItem("user", JSON.stringify(res.data.user));
+localStorage.setItem("token", res.data.token);
+
+window.location.href = "/";
 
 
 
