@@ -15,7 +15,7 @@ export default function MyBookings(){
    return;
   }
 
-  axios.get(`${API}/api/bookings/user/${user._id}`)
+  axios.get(`${API}/api/booking/user/${user._id}`)
   .then(res=>setBookings(res.data))
   .catch(err=>console.log(err));
 
