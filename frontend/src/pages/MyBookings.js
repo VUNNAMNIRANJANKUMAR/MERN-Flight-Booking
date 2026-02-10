@@ -29,10 +29,10 @@ export default function MyBookings(){
 
    {bookings.map(b=>(
     <div key={b._id} style={{border:"1px solid #ccc",padding:10,margin:10}}>
-     <h3>{b.flightId.from} → {b.flightId.to}</h3>
-     <p>Date: {b.flightId.journeyDate}</p>
-     <p>Departure: {b.flightId.departureTime}</p>
-     <p>Status: {new Date(b.flightId.journeyDate) < new Date() ? "Journey Over" : "Yet To Fly"}</p>
+     <h3>{b.flightId?.from} → {b.flightId?.to}</h3>
+     <p>Date: {b.flightId?.journeyDate}</p>
+     <p>Departure: {b.flightId?.departureTime}</p>
+     <p>Status: {new Date(b.flightId?.journeyDate) < new Date() ? "Journey Over" : "Yet To Fly"}</p>
     </div>
    ))}
 
