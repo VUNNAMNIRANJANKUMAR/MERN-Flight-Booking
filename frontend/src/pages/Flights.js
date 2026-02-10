@@ -105,8 +105,8 @@ export default function Flights() {
    return;
   }
 
-  axios.post(`${API}/api/bookings/book`,{
-   userId:user.id,
+  axios.post(`${API}/api/booking/book`,{
+   userId:user._id,
    flightId:flight._id,
    seatsBooked:1,
    totalPrice:flight.price
