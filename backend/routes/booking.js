@@ -4,19 +4,20 @@ const Flight = require("../models/Flight");
 
 const router = express.Router();
 
+// BOOK FLIGHT
 router.post("/book", async (req, res) => {
  try {
   const { userId, flightId, seatsBooked } = req.body;
 
   const flight = await Flight.findById(flightId);
   if (!flight) return res.status(404).json({ message: "Flight not found" });
-  if (flight.seats < seatsBooked) return res.status(400).json({ message: "Not enough seats available" });
 
-  // reduce seats
+  if (flight.seats < seatsBooked)
+   return res.status(400).json({ message: "Not enough seats" });
+
   flight.seats -= seatsBooked;
   await flight.save();
 
-  // CREATE BOOKING WITH STATUS
   const booking = await Booking.create({
    userId,
    flightId,
@@ -25,17 +26,19 @@ router.post("/book", async (req, res) => {
    status: "Booked"
   });
 
-  res.status(201).json(booking);
+  res.json(booking);
 
  } catch (err) {
   res.status(500).json({ error: err.message });
  }
 });
 
+// GET USER BOOKINGS
 router.get("/:userId", async (req,res)=>{
  try{
   const bookings = await Booking.find({ userId:req.params.userId })
-   .populate("flightId", "from to journeyDate departureTime arrivalTime price airline travelClass");
+   .populate("flightId");
+
   res.json(bookings);
 
  }catch(err){
@@ -43,10 +46,11 @@ router.get("/:userId", async (req,res)=>{
  }
 });
 
+// CANCEL
 router.delete("/:id", async (req,res)=>{
  try{
   await Booking.findByIdAndDelete(req.params.id);
-  res.json({message:"Booking cancelled"});
+  res.json({message:"Cancelled"});
  }catch(err){
   res.status(500).json({error:err.message});
  }
