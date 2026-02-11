@@ -4,17 +4,17 @@ const Flight = require("../models/Flight");
 
 const router = express.Router();
 
-/* BOOK FLIGHT */
-router.post("/book", async (req, res) => {
- try {
-
+// BOOK
+router.post("/book", async (req,res)=>{
+ try{
   const { userId, flightId, seatsBooked } = req.body;
 
-  const flight = await Flight.findById(flightId);
-  if (!flight) return res.status(404).json({ message: "Flight not found" });
+  if(!userId || !flightId){
+   return res.status(400).json({message:"Missing data"});
+  }
 
-  if (flight.seats < seatsBooked)
-   return res.status(400).json({ message: "Not enough seats" });
+  const flight = await Flight.findById(flightId);
+  if(!flight) return res.status(404).json({message:"Flight not found"});
 
   flight.seats -= seatsBooked;
   await flight.save();
@@ -24,41 +24,29 @@ router.post("/book", async (req, res) => {
    flightId,
    seatsBooked,
    totalPrice: seatsBooked * flight.price,
-   status: "Booked"
+   status:"Booked"
   });
 
-  res.status(201).json(booking);
+  res.json(booking);
 
- } catch (err) {
-  res.status(500).json({ error: err.message });
+ }catch(err){
+  console.error(err);
+  res.status(500).json({error:err.message});
  }
 });
 
-
-/* GET USER BOOKINGS */
-router.get("/:userId", async (req, res) => {
- try {
-  let bookings = await Booking.find({ userId: req.params.userId })
+// GET USER BOOKINGS
+router.get("/:userId", async (req,res)=>{
+ try{
+  let bookings = await Booking.find({userId:req.params.userId})
    .populate("flightId");
 
-  // REMOVE broken bookings
-  bookings = bookings.filter(b => b.flightId !== null);
+  bookings = bookings.filter(b=>b.flightId!==null);
 
   res.json(bookings);
 
- } catch (err) {
-  console.error(err);
-  res.status(500).json({ error: err.message });
- }
-});
-
-
-/* CANCEL BOOKING */
-router.delete("/:id", async (req,res)=>{
- try{
-  await Booking.findByIdAndDelete(req.params.id);
-  res.json({message:"Cancelled"});
  }catch(err){
+  console.error(err);
   res.status(500).json({error:err.message});
  }
 });
