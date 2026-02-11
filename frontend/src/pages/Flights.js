@@ -38,8 +38,8 @@ export default function Flights() {
  }
 
  axios.post(`${API}/api/booking/book`,{
-  userId: user._id,   // ← MUST be _id
-  flightId: flight._id,
+  userId: user.id,   // ← MUST be _id
+  flightId: flight.id,
   seatsBooked: 1
  }).then(()=>{
   navigate("/mybookings");
