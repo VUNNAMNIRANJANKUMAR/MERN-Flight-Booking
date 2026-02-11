@@ -12,7 +12,7 @@ export default function MyBookings(){
   const user=JSON.parse(localStorage.getItem("user"));
   if(!user) return;
 
-  axios.get(`${API}/api/booking/${user._id}`)
+  axios.get(`${API}/api/booking/${user.id}`)
    .then(res=>setBookings(res.data))
    .catch(err=>console.log(err));
 
