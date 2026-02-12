@@ -4,63 +4,64 @@ const Flight = require("../models/Flight");
 
 const router = express.Router();
 
-// BOOK FLIGHT
-router.post("/book", async (req, res) => {
-  try {
-    const { userId, flightId, seatsBooked } = req.body;
+// BOOK
+router.post("/book", async (req,res)=>{
+ try{
+  const { userId, flightId, seatsBooked } = req.body;
 
-    // validation
-    if (!userId || !flightId || !seatsBooked) {
-      return res.status(400).json({ message: "Missing userId, flightId or seatsBooked" });
-    }
+  if(!userId || !flightId)
+   return res.status(400).json({message:"Missing data"});
 
-    const flight = await Flight.findById(flightId);
-    if (!flight) return res.status(404).json({ message: "Flight not found" });
+  const flight = await Flight.findById(flightId);
+  if(!flight) return res.status(404).json({message:"Flight not found"});
 
-    if (flight.seats < seatsBooked)
-      return res.status(400).json({ message: "Not enough seats available" });
+  if(flight.seats < seatsBooked)
+   return res.status(400).json({message:"No seats"});
 
-    // reduce seats
-    flight.seats -= seatsBooked;
-    await flight.save();
+  flight.seats -= seatsBooked;
+  await flight.save();
 
-    const booking = await Booking.create({
-      userId,
-      flightId,
-      seatsBooked,
-      totalPrice: seatsBooked * flight.price,
-      status: "Booked"
-    });
+  const booking = await Booking.create({
+   userId,
+   flightId,
+   seatsBooked,
+   totalPrice: flight.price,
+   status:"Booked"
+  });
 
-    res.status(201).json(booking);
-  } catch (err) {
-    console.error("Booking POST error:", err);
-    res.status(500).json({ error: err.message });
-  }
+  res.json(booking);
+
+ }catch(err){
+  console.log(err);
+  res.status(500).json({error:err.message});
+ }
 });
 
 // GET USER BOOKINGS
-router.get("/:userId", async (req, res) => {
-  try {
-    const bookings = await Booking.find({ userId: req.params.userId })
-      .populate("flightId");
+router.get("/:userId", async(req,res)=>{
+ try{
+  const bookings = await Booking.find({ userId:req.params.userId })
+   .populate("flightId");
 
-    res.json(bookings);
-  } catch (err) {
-    console.error("Bookings GET error:", err);
-    res.status(500).json({ error: err.message });
-  }
+  // REMOVE BROKEN BOOKINGS
+  const clean = bookings.filter(b=>b.flightId);
+
+  res.json(clean);
+
+ }catch(err){
+  console.log(err);
+  res.status(500).json({error:err.message});
+ }
 });
 
-// CANCEL BOOKING
-router.delete("/:id", async (req, res) => {
-  try {
-    await Booking.findByIdAndDelete(req.params.id);
-    res.json({ message: "Booking cancelled" });
-  } catch (err) {
-    console.error("Booking DELETE error:", err);
-    res.status(500).json({ error: err.message });
-  }
+// CANCEL
+router.delete("/:id", async(req,res)=>{
+ try{
+  await Booking.findByIdAndDelete(req.params.id);
+  res.json({message:"Cancelled"});
+ }catch(err){
+  res.status(500).json({error:err.message});
+ }
 });
 
 module.exports = router;
