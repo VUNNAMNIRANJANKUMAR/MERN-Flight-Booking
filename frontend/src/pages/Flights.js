@@ -59,7 +59,23 @@ export default function Flights() {
       <input placeholder="From" onChange={e => setFrom(e.target.value)} />
       <input placeholder="To" onChange={e => setTo(e.target.value)} />
       <input type="date" onChange={e => setDate(e.target.value)} />
-      <button onClick={search}>Search</button>
+      <button 
+  onClick={search}
+  style={{
+    padding: "12px 25px",
+    fontSize: "18px",
+    backgroundColor: "#28a745",
+    color: "white",
+    border: "none",
+    borderRadius: "6px",
+    cursor: "pointer",
+    transition: "0.3s"
+  }}
+  onMouseOver={e => e.target.style.backgroundColor = "#218838"}
+  onMouseOut={e => e.target.style.backgroundColor = "#28a745"}
+>
+  Search
+</button>
 
       {flights.map((f) => (
         <div key={f._id} style={{ border: "1px solid #ccc", margin: 10, padding: 10 }}>
