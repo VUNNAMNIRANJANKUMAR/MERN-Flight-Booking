@@ -11,7 +11,10 @@ export default function Login() {
     try {
       const res = await axios.post(
         "https://mern-flight-booking-6qke.onrender.com/api/auth/login",
-        { email, password }
+        { 
+  email: email.trim(), 
+  password: password.trim() 
+}
       );
 
       console.log(res.data);
