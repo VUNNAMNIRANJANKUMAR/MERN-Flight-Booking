@@ -30,17 +30,25 @@ router.post("/register", async (req, res) => {
 });
 
 // Login
-router.post("/login", async (req, res) => {
+
+  router.post("/login", async (req, res) => {
   try {
-     console.log("BODY:", req.body);
+    console.log("BODY:", req.body);
+
     const { email, password } = req.body;
 
+    console.log("EMAIL:", email);
+    console.log("PASSWORD:", password);
+
     const user = await User.findOne({ email });
+    console.log("USER FOUND:", user ? "YES" : "NO");
+
     if (!user)
       return res.status(400).json({ message: "Invalid credentials" });
 
     const isMatch = await bcrypt.compare(password, user.password);
     console.log("MATCH:", isMatch);
+
     if (!isMatch)
       return res.status(400).json({ message: "Invalid credentials" });
 
@@ -61,9 +69,9 @@ router.post("/login", async (req, res) => {
     });
 
   } catch (err) {
+    console.log("ERROR:", err);
     res.status(500).json({ error: err.message });
   }
-});
+});   
 
 
-module.exports = router;
