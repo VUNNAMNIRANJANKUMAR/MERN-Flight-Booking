@@ -27,7 +27,7 @@ window.location.href = "/";
     <div>
       <h2>Login</h2>
     <p>
-  New user? <a href="/register">Register</a>
+  New user? <link to="/register">Register</link>
 </p>
 
       <input placeholder="email" onChange={e => setEmail(e.target.value)} />
