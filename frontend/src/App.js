@@ -6,7 +6,7 @@ import Flights from "./pages/Flights";
 import MyBookings from "./pages/MyBookings";
 import Navbar from "./components/Navbar";
 import Success from "./pages/Success";
-import SearchPNR from "./SearchPNR";
+import SearchPNR from "./pages/SearchPNR";
 
 
 
