@@ -43,10 +43,13 @@ const cancelBooking = async (id) => {
      <h3>{b.flightId.from} → {b.flightId.to}</h3>
      <p>{b.flightId.journeyDate}</p>
      <p>{b.flightId.departureTime}</p>
+    <p><strong>PNR:</strong> {b.pnr}</p>
      <p style={{ color: b.status === "Cancelled" ? "red" : "green" }}>
   Status: {b.status}
 </p>
-    <p>PNR: {b.pnr}</p>
+    <p style={{ fontWeight:"bold", color:"#007bff", fontSize:"18px" }}>
+  PNR: {b.pnr}
+</p>
  <button 
   onClick={() => cancelBooking(b._id)}
   disabled={b.status === "Cancelled"}
