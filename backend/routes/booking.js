@@ -5,7 +5,11 @@ const Flight = require("../models/Flight");
 const router = express.Router();
 
 function generatePNR() {
-  return "PNR" + Math.floor(100000 + Math.random() * 900000);
+  let pnr = "";
+  for (let i = 0; i < 12; i++) {
+    pnr += Math.floor(Math.random() * 10);
+  }
+  return pnr;
 }
 
 // BOOK
