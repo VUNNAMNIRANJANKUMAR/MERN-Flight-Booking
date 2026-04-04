@@ -34,6 +34,18 @@ const cancelBooking = async (id) => {
  return(
   <div style={{padding:20}}>
    <h2>My Bookings</h2>
+   <Link 
+  to="/search-pnr"
+  style={{
+    padding: "10px 15px",
+    backgroundColor: "#007bff",
+    color: "white",
+    textDecoration: "none",
+    borderRadius: "5px"
+  }}
+>
+  Search PNR
+</Link>
 
    {bookings.length===0 && <p>No bookings</p>}
 
