@@ -61,7 +61,7 @@ router.get("/:userId", async(req,res)=>{
  }
 });
 
-// CANCEL
+
 // CANCEL
 router.delete("/:id", async (req, res) => {
   try {
@@ -82,3 +82,5 @@ router.delete("/:id", async (req, res) => {
     res.status(500).json({ error: err.message });
   }
 });
+
+module.exports = router;
