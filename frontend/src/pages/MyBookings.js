@@ -30,6 +30,7 @@ export default function MyBookings(){
      <p>{b.flightId.journeyDate}</p>
      <p>{b.flightId.departureTime}</p>
      <p>Status: {b.status}</p>
+    <p>PNR: {b.pnr}</p>
 
     </div>
    ))}
