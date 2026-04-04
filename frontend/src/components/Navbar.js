@@ -107,7 +107,7 @@ const styles = {
     padding: "6px 12px",
     borderRadius: "5px",
     cursor: "pointer"
-  }
+  },
 
  link: {
   color: "white",
