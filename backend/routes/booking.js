@@ -60,13 +60,23 @@ router.get("/:userId", async(req,res)=>{
 });
 
 // CANCEL
-router.delete("/:id", async(req,res)=>{
- try{
-  await Booking.findByIdAndDelete(req.params.id);
-  res.json({message:"Cancelled"});
- }catch(err){
-  res.status(500).json({error:err.message});
- }
-});
+// CANCEL
+router.delete("/:id", async (req, res) => {
+  try {
+    const booking = await Booking.findById(req.params.id);
 
-module.exports = router;
+    if (!booking) {
+      return res.status(404).json({ message: "Booking not found" });
+    }
+
+    // Update status instead of deleting
+    booking.status = "Cancelled";
+    await booking.save();
+
+    res.json({ message: "Ticket cancelled", booking });
+
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({ error: err.message });
+  }
+});
