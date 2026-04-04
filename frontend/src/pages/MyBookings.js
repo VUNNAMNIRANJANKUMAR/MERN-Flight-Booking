@@ -52,7 +52,7 @@ const cancelBooking = async (id) => {
    {bookings.length===0 && <p>No bookings</p>}
 
    {bookings.map(b=>(
-    <div key={b._id} style={{border:"1px solid",margin:10,padding:10}}>
+    <div key={b._id} style={{border:"1px solid",margin:10,padding:10,marginTop:"20px"}}>
 
      <h3>{b.flightId.from} → {b.flightId.to}</h3>
      <p>{b.flightId.journeyDate}</p>
