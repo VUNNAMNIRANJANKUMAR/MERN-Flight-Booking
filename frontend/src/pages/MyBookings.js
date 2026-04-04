@@ -16,7 +16,21 @@ export default function MyBookings(){
    .catch(err=>console.log(err));
 
  },[]);
+const cancelBooking = async (id) => {
+  try {
+    await axios.delete(`${API}/api/booking/${id}`);
+    alert("Ticket cancelled");
 
+    // update UI instantly
+    setBookings(bookings.map(b =>
+      b._id === id ? { ...b, status: "Cancelled" } : b
+    ));
+
+  } catch (err) {
+    console.log(err);
+    alert("Cancel failed");
+  }
+};
  return(
   <div style={{padding:20}}>
    <h2>My Bookings</h2>
@@ -29,8 +43,16 @@ export default function MyBookings(){
      <h3>{b.flightId.from} → {b.flightId.to}</h3>
      <p>{b.flightId.journeyDate}</p>
      <p>{b.flightId.departureTime}</p>
-     <p>Status: {b.status}</p>
+     <p style={{ color: b.status === "Cancelled" ? "red" : "green" }}>
+  Status: {b.status}
+</p>
     <p>PNR: {b.pnr}</p>
+ <button 
+  onClick={() => cancelBooking(b._id)}
+  disabled={b.status === "Cancelled"}
+>
+  Cancel Ticket
+</button>
 
     </div>
    ))}
