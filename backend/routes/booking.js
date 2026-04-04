@@ -47,7 +47,23 @@ router.post("/book", async (req,res)=>{
   res.status(500).json({error:err.message});
  }
 });
+// SEARCH BY PNR
+router.get("/pnr/:pnr", async (req, res) => {
+  try {
+    const booking = await Booking.findOne({ pnr: req.params.pnr })
+      .populate("flightId");
 
+    if (!booking) {
+      return res.status(404).json({ message: "PNR not found" });
+    }
+
+    res.json(booking);
+
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({ error: err.message });
+  }
+});
 // GET USER BOOKINGS
 router.get("/:userId", async(req,res)=>{
  try{
