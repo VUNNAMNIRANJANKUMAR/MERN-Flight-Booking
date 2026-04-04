@@ -6,6 +6,8 @@ import Flights from "./pages/Flights";
 import MyBookings from "./pages/MyBookings";
 import Navbar from "./components/Navbar";
 import Success from "./pages/Success";
+import SearchPNR from "./SearchPNR";
+
 
 
 export default function App() {
@@ -19,6 +21,7 @@ export default function App() {
         <Route path="/register" element={<Register />} />
         <Route path="/mybookings" element={<MyBookings />} />
         <Route path="/success" element={<Success/>}/>
+        <Route path="/search-pnr" element={<SearchPNR />} />
       </Routes>
     </>
   );
