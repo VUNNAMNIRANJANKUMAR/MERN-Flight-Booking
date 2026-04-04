@@ -6,6 +6,10 @@ const bookingSchema = new mongoose.Schema({
   seatsBooked: { type: Number, required: true },
   totalPrice: { type: Number, required: true },
   status: { type: String, default: "Booked" } // Booked, Cancelled
+  pnr: {
+  type: String,
+  unique: true
+}
 }, { timestamps: true });
 
 module.exports = mongoose.model("Booking", bookingSchema);
