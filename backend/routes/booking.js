@@ -21,12 +21,17 @@ router.post("/book", async (req,res)=>{
   flight.seats -= seatsBooked;
   await flight.save();
 
+  function generatePNR() {
+  return "PNR" + Math.floor(100000 + Math.random() * 900000);
+}
+
   const booking = await Booking.create({
    userId,
    flightId,
    seatsBooked,
    totalPrice: flight.price,
    status:"Booked"
+   pnr: generatePNR()
   });
 
   res.json(booking);
