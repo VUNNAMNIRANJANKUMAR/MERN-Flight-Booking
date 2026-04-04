@@ -42,7 +42,8 @@ const cancelBooking = async (id) => {
     backgroundColor: "#007bff",
     color: "white",
     textDecoration: "none",
-    borderRadius: "5px"
+    borderRadius: "5px",
+    margin-bottom: "20px"
   }}
 >
   Search PNR
